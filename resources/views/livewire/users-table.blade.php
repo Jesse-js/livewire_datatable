@@ -80,9 +80,9 @@
                             </select>
                         </div>
                     </div>
+                    {{ $users->links('livewire::tailwind') }}
                 </div>
             </div>
         </div>
     </section>
-    {{ $users->links() }}
 </div>
