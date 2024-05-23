@@ -12,9 +12,12 @@ class UsersTable extends Component
     use WithPagination;
 
     public int $registersPerPage = 5;
+    public string $search = '';
 
     public function render()
     {
-        return view('livewire.users-table', ['users' => User::paginate($this->registersPerPage)]);
+        return view('livewire.users-table', [
+            'users' => User::search($this->search)->paginate($this->registersPerPage)
+        ]);
     }
 }
