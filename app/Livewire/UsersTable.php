@@ -15,6 +15,11 @@ class UsersTable extends Component
     public string $search = '';
     public string $role = '';
 
+    public function delete(User $user): void
+    {
+        $user->delete();
+    }
+
     public function render()
     {
         return view('livewire.users-table', [
