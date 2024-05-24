@@ -11,9 +11,13 @@ class UsersTable extends Component
 
     use WithPagination;
 
-    public int $registersPerPage = 5;
     public string $search = '';
     public string $role = '';
+    
+    public int $registersPerPage = 5;
+
+    public string $sortBy = 'created_at';
+    public string $sortDirection = 'asc';
 
     public function delete(User $user): void
     {
@@ -24,7 +28,8 @@ class UsersTable extends Component
     {
         return view('livewire.users-table', [
             'users' => User::search($this->search)
-                ->role($this->role)->paginate($this->registersPerPage)
+                ->role($this->role)->orderBy($this->sortBy, $this->sortDirection)
+                ->paginate($this->registersPerPage)
         ]);
     }
 }
