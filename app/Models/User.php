@@ -44,4 +44,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->whereAny(['name', 'email'], 'like', "%{$search}%");
+    }
+
+    public function scopeRole($query, $role)
+    {
+        return $query->when(
+            $role !== '',
+            fn ($query) => $query->where('is_admin', $role)
+        );
+    }
 }
