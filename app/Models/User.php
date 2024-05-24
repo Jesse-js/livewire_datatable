@@ -49,4 +49,12 @@ class User extends Authenticatable
     {
         return $query->whereAny(['name', 'email'], 'like', "%{$search}%");
     }
+
+    public function scopeRole($query, $role)
+    {
+        return $query->when(
+            $role !== '',
+            fn ($query) => $query->where('is_admin', $role)
+        );
+    }
 }

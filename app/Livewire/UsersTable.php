@@ -13,11 +13,13 @@ class UsersTable extends Component
 
     public int $registersPerPage = 5;
     public string $search = '';
+    public string $role = '';
 
     public function render()
     {
         return view('livewire.users-table', [
-            'users' => User::search($this->search)->paginate($this->registersPerPage)
+            'users' => User::search($this->search)
+                ->role($this->role)->paginate($this->registersPerPage)
         ]);
     }
 }
